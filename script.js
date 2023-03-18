@@ -4,10 +4,16 @@
 
 function productDisplay(name,path,shown){
 
-    this.name = name;
-    this.name = path;
-    this.shown = shown;
-    this.variable = function(){
-        
-    }
+  this.name = name;
+  this.name = path;
+  this.shown = shown;
+  this.render = function(){
+    let img = document.createElement("img");
+    
+  }
 }
+
+
+
+
+let bag = new productDisplay('Bag',"/img/bag.jpg", //no number yet)
