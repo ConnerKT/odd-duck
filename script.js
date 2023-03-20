@@ -65,14 +65,33 @@ function render(){
   state.duckArray[value2].views++;
   state.duckArray[value3].views++;
 }
-function duckDisplay(event){
-  product1.addEventListener('click', );{
-    state.duckArray[value1].clicks++;
-    render();
+function duckDisplay() {
+  container.addEventListener('click', function(event){
+    if (clicks === totalClicks){
+        breakEvent();
+    }
+    else if(event.target === product1){
+      state.duckArray[value1].clicks++;
+      render();
+      return;
+    } else if (event.target === product2){
+        state.duckArray[value2].clicks++;
+      render();
+      return;
+    }else if(event.target === product3){
+        state.duckArray[value3].clicks++;
+      render();
+      return;
+    }
 
-  }
+  })
 
 
+}
+
+function breakEvent(){
+    container.removeEventListener('click')
+    return
 }
 
 
