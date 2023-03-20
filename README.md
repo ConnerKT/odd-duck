@@ -6,4 +6,4 @@
 
 Check it out!
 
-![Hire Me Google](/odd-duck/misc_src/hiremegoogle.gif);
+![Hire Me Google](./misc_src/hiremegoogle.png);
