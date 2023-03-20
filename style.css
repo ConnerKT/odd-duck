@@ -1,0 +1,15 @@
+body {
+    background-color: navajowhite;
+}
+img {
+    width:20%;
+    height:20%;
+    margin:20px;
+    cursor: pointer;
+}
+section {
+    display:flex;
+    align-content: center;
+    justify-content: center;
+    
+}
