@@ -2,16 +2,15 @@
 // This is assigning global variables for the section we are printing the images to, and the three img tags
 // This is so we can have it globally declared in the scope so we can modify the content (src)
 
-
-let container = document.querySelector("section");
+let container = document.querySelector('section');
 let product1 = document.querySelector('section img:first-child');
 let product2 = document.querySelector('section img:nth-child(2)');
 let product3 = document.querySelector('section img:nth-child(3)');
-let button = document.querySelector('button');
+let button = document.getElementById('button');
 
 // assign a global variable for clicks, so when the program is run the variable is set to 0
 
-let clicks = 0;
+let clickcount = 0;
 
 // Assigning global clicks, so I can break my loop if clicks == totalClicks
 
@@ -36,20 +35,29 @@ function getRandom(){
   return Math.floor(Math.random() * state.duckArray.length);
 }
 
+
+var value1 = getRandom();
+var value2 = getRandom();
+var value3 = getRandom();
+
 // Setting a render function, and assigning variables that contain random numbers so we can randomize through our array and show random images
+
+
 
 function render(){
 
   // These variables are only accessible in our function because of local scope
 
-  let value1 = getRandom();
-  let value2 = getRandom();
-  let value3 = getRandom();
-  
+  value1 = getRandom();
+  value2 = getRandom();
+  value3 = getRandom();
 
   //The products are the img tags in HTML, we are targetting the src and alt of each img tag to randomzie the img shown on each
   while (value1 === value2){
     value2 = getRandom();
+  }
+  while (value2 === value3){
+    value3 = getRandom();
   }
 
   product1.src = state.duckArray[value1].path;
@@ -67,33 +75,57 @@ function render(){
 }
 function duckDisplay() {
   container.addEventListener('click', function(event){
-    if (clicks === totalClicks){
-        breakEvent();
+    if (clickcount === totalClicks){
+      product1.remove();
+      product2.remove();
+      product3.remove();
+      breakEvent();
     }
     else if(event.target === product1){
+      //console.log(state.duckArray[value1].clicks);
       state.duckArray[value1].clicks++;
+      //console.log(state.duckArray[value1].clicks);
+      clickcount++;
       render();
       return;
     } else if (event.target === product2){
-        state.duckArray[value2].clicks++;
+      state.duckArray[value2].clicks++;
+      clickcount++;
       render();
       return;
     }else if(event.target === product3){
-        state.duckArray[value3].clicks++;
+      state.duckArray[value3].clicks++;
+      clickcount++;
       render();
       return;
     }
 
-  })
+  });
 
 
 }
 
 function breakEvent(){
-    container.removeEventListener('click')
-    return
+  container.removeEventListener('click', duckDisplay());
+  results();
+  return;
 }
 
+function results(){
+  document.getElementById('button').style.cursor = 'pointer';
+  let ul = document.querySelector('ul');
+  button.addEventListener('click', function(){
+    for (let x = 0; x < state.duckArray.length; x++){
+      let li = document.createElement('li');
+      li.innerHTML = `${state.duckArray[x].name} has ${state.duckArray[x].views} views and ${state.duckArray[x].clicks} clicks.`;
+      ul.append(li);
+
+      console.log(state.duckArray[x]);
+      console.log(x);
+      console.log(state.duckArray.length);
+    }
+  });
+}
 
 
 // Assigning New objects through the constructor function
