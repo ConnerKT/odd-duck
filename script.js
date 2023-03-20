@@ -66,8 +66,16 @@ function render(){
   state.duckArray[value3].views++;
 }
 function duckDisplay(event){
+  product1.addEventListener('click', );{
+    state.duckArray[value1].clicks++;
+    render();
+
+  }
+
 
 }
+
+
 
 // Assigning New objects through the constructor function
 
@@ -96,4 +104,4 @@ let wineglass = new Products('Fancy Wine Glass', './img/wine-glass.jpg', 0);
 state.duckArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);
 
 render();
-
+duckDisplay();
