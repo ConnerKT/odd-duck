@@ -124,6 +124,7 @@ function results(){
       console.log(x);
       console.log(state.duckArray.length);
     }
+    button.remove();
   });
 }
 
