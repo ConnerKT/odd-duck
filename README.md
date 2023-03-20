@@ -1,4 +1,4 @@
-# <img height="35" src="/odd-duck\misc_src\j221odxep5p01.gif"> Odd Duck Project
+# <img height="55" src="https://github.com/ConnerKT/odd-duck/blob/9c13a2242f240d1706ad89a4072db81a5474936e/misc_src/j221odxep5p01.gif"/> Odd Duck Project
 
 ## This is the project for the CodeCrew Module 201, Class 11.
 
@@ -6,4 +6,6 @@
 
 Check it out!
 
+
 ![Hire Me Google](/odd-duck/misc_src/hiremegoogle.gif);
+
