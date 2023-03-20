@@ -5,3 +5,7 @@
 ## This project uses Constructor Functions, Algorithms, Functions, DOM Manipulation, and more!
 
 Check it out!
+
+
+![Hire Me Google](/odd-duck/misc_src/hiremegoogle.gif);
+
