@@ -7,5 +7,5 @@
 Check it out!
 
 
-![Hire Me Google](/odd-duck/misc_src/hiremegoogle.gif);
+![Hire Me Google](./odd-duck/misc_src/hiremegoogle.gif)
 
