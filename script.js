@@ -35,30 +35,41 @@ function getRandom(){
   return Math.floor(Math.random() * state.duckArray.length);
 }
 
-
+// Setting the values to get random so its a global scope and so it can be defined in other functions
 var value1 = getRandom();
 var value2 = getRandom();
 var value3 = getRandom();
 
+
+
+
 // Setting a render function, and assigning variables that contain random numbers so we can randomize through our array and show random images
-
-
-
 function render(){
-
-  // These variables are only accessible in our function because of local scope
+  let valueArray = [value1, value2, value3];
 
   value1 = getRandom();
   value2 = getRandom();
   value3 = getRandom();
 
+  // if (value1 === valueArray[1] || value1 === valueArray[2] || value1 === valueArray[3] ){
+  //   value1 = getRandom();
+  // }
+  // if (value2 === valueArray || value2 === valueArray[2] || value1 === valueArray[3] ){
+  //   value2 = getRandom();
+  // }
+  // if (value3 === valueArray || value3 === valueArray[2] || value3 === valueArray[3] ){
+  //   value3 = getRandom();
+  // }
+
   //The products are the img tags in HTML, we are targetting the src and alt of each img tag to randomzie the img shown on each
+
   while (value1 === value2){
     value2 = getRandom();
   }
   while (value2 === value3){
     value3 = getRandom();
   }
+
 
   product1.src = state.duckArray[value1].path;
   product2.src = state.duckArray[value2].path;
