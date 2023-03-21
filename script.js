@@ -40,37 +40,28 @@ var value1 = getRandom();
 var value2 = getRandom();
 var value3 = getRandom();
 
-
-
+let valueArray = [value1, value2, value3];
+let a = valueArray[0];
+let b = valueArray[1];
+let c = valueArray[2];
 
 // Setting a render function, and assigning variables that contain random numbers so we can randomize through our array and show random images
 function render(){
-  let valueArray = [value1, value2, value3];
-
   value1 = getRandom();
   value2 = getRandom();
   value3 = getRandom();
 
-  // if (value1 === valueArray[1] || value1 === valueArray[2] || value1 === valueArray[3] ){
-  //   value1 = getRandom();
-  // }
-  // if (value2 === valueArray || value2 === valueArray[2] || value1 === valueArray[3] ){
-  //   value2 = getRandom();
-  // }
-  // if (value3 === valueArray || value3 === valueArray[2] || value3 === valueArray[3] ){
-  //   value3 = getRandom();
-  // }
+  while (value1 === a){
+    value1 = getRandom();
+  }
 
-  //The products are the img tags in HTML, we are targetting the src and alt of each img tag to randomzie the img shown on each
-
-  while (value1 === value2){
+  while (value2 === b){
     value2 = getRandom();
   }
-  while (value2 === value3){
+
+  while (value3 === c){
     value3 = getRandom();
   }
-
-
   product1.src = state.duckArray[value1].path;
   product2.src = state.duckArray[value2].path;
   product3.src = state.duckArray[value3].path;
@@ -130,11 +121,29 @@ function results(){
       let li = document.createElement('li');
       li.innerHTML = `${state.duckArray[x].name} has ${state.duckArray[x].views} views and ${state.duckArray[x].clicks} clicks.`;
       ul.append(li);
-
-      console.log(state.duckArray[x]);
-      console.log(x);
-      console.log(state.duckArray.length);
     }
+
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [state.duckArray[0].name, state.duckArray[1].name, state.duckArray[2].name, state.duckArray[3].name, state.duckArray[4].name, state.duckArray[5].name],
+        datasets: [{
+          label: '# of Views',
+          data: [state.duckArray[0].views,state.duckArray[1].views,state.duckArray[2].views,state.duckArray[3].views,state.duckArray[4].views,state.duckArray[4].views],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
     button.remove();
   });
 }
