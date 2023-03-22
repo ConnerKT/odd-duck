@@ -20,6 +20,8 @@ let state = {
   duckArray : [],
 };
 
+
+
 // Forming constructor function to OOP code
 
 function Products(name,path,views){
@@ -113,11 +115,10 @@ function breakEvent(){
   return;
 }
 
-let clicksArray = [];
-for (let x = 0; x < state.duckArray.length;x++){
-  let clicks = state.duckArray[x].clicks
-  clicksArray.push(clicks) 
-}
+let existingViews = [];
+let existingClicks = [];
+
+let existingViewStorage = localStorage.getItem('')
 
 function results(){
   document.getElementById('button').style.cursor = 'pointer';
