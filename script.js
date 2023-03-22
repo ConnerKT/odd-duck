@@ -113,6 +113,12 @@ function breakEvent(){
   return;
 }
 
+let clicksArray = [];
+for (let x = 0; x < state.duckArray.length;x++){
+  let clicks = state.duckArray[x].clicks
+  clicksArray.push(clicks) 
+}
+
 function results(){
   document.getElementById('button').style.cursor = 'pointer';
   let ul = document.querySelector('ul');
@@ -125,23 +131,51 @@ function results(){
 
     const ctx = document.getElementById('myChart');
 
+    let clicksArray = [];
+    for (let x = 0; x < state.duckArray.length;x++){
+      let clicks = state.duckArray[x].clicks
+      clicksArray.push(clicks) 
+    }
+    let viewsArray = [];
+    for (let x = 0; x < state.duckArray.length;x++){
+      let views = state.duckArray[x].views
+      viewsArray.push(views) 
+    }
+    let nameArray = [];
+    for (let x = 0; x < state.duckArray.length;x++){
+      let names = state.duckArray[x].name
+      nameArray.push(names) 
+    }
+    console.log(clicksArray)
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: [state.duckArray[0].name, state.duckArray[1].name, state.duckArray[2].name, state.duckArray[3].name, state.duckArray[4].name, state.duckArray[5].name],
+        labels: nameArray,
         datasets: [{
           label: '# of Views',
-          data: [state.duckArray[0].views,state.duckArray[1].views,state.duckArray[2].views,state.duckArray[3].views,state.duckArray[4].views,state.duckArray[4].views],
+          data: viewsArray,
           borderWidth: 1
-        }]
+        },
+        {
+          label: '# of Clicks',
+          data: clicksArray,
+          borderWidth:1,
+        },
+      ],
       },
       options: {
-        scales: {
+        animations:{
+          x: {
+            duration: 5000,
+            from: 0
+          },
           y: {
-            beginAtZero: true
+            duration: 3000,
+            from: 500
+        
+        }
           }
         }
-      }
     });
 
     button.remove();
