@@ -8,12 +8,7 @@ let product2 = document.querySelector('section img:nth-child(2)');
 let product3 = document.querySelector('section img:nth-child(3)');
 let button = document.getElementById('button');
 
-// Setting the getitem for views and clicks so it retains after refresh
 
-let existingClicks = JSON.parse("existingClicks");
-localStorage.getitem(existingClicks);
-let existingViews = JSON.parse("existingViews");
-localStorage.getitem(existingViews);
 
 // assign a global variable for clicks, so when the program is run the variable is set to 0
 let clickcount = 0;
@@ -157,8 +152,13 @@ function results(){
 
     localStorage.getitem("existingViews",JSON.stringify(viewsArray));
     localStorage.getitem("existingClicks",JSON.stringify(clicksArray));
-
-   
+    
+    // Setting the getitem for views and clicks so it retains after refresh
+    let existingClicks = JSON.parse(existingClicks);
+    localStorage.getitem(existingClicks);
+    let existingViews = JSON.parse(existingViews);
+    localStorage.getitem(existingViews);
+    
     // This is a chart that contain different data with arrays and has an animation set from x to y.
 
     new Chart(ctx, {
