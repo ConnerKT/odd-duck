@@ -35,31 +35,33 @@ function getRandom(){
   return Math.floor(Math.random() * state.duckArray.length);
 }
 
-
+// Setting the values to get random so its a global scope and so it can be defined in other functions
 var value1 = getRandom();
 var value2 = getRandom();
 var value3 = getRandom();
 
+let valueArray = [value1, value2, value3];
+let a = valueArray[0];
+let b = valueArray[1];
+let c = valueArray[2];
+
 // Setting a render function, and assigning variables that contain random numbers so we can randomize through our array and show random images
-
-
-
 function render(){
-
-  // These variables are only accessible in our function because of local scope
-
   value1 = getRandom();
   value2 = getRandom();
   value3 = getRandom();
 
-  //The products are the img tags in HTML, we are targetting the src and alt of each img tag to randomzie the img shown on each
-  while (value1 === value2){
-    value2 = getRandom();
-  }
-  while (value2 === value3){
-    value3 = getRandom();
+  while (value1 === a){
+    value1 = getRandom();
   }
 
+  while (value2 === b){
+    value2 = getRandom();
+  }
+
+  while (value3 === c){
+    value3 = getRandom();
+  }
   product1.src = state.duckArray[value1].path;
   product2.src = state.duckArray[value2].path;
   product3.src = state.duckArray[value3].path;
@@ -111,6 +113,12 @@ function breakEvent(){
   return;
 }
 
+let clicksArray = [];
+for (let x = 0; x < state.duckArray.length;x++){
+  let clicks = state.duckArray[x].clicks
+  clicksArray.push(clicks) 
+}
+
 function results(){
   document.getElementById('button').style.cursor = 'pointer';
   let ul = document.querySelector('ul');
@@ -119,11 +127,57 @@ function results(){
       let li = document.createElement('li');
       li.innerHTML = `${state.duckArray[x].name} has ${state.duckArray[x].views} views and ${state.duckArray[x].clicks} clicks.`;
       ul.append(li);
-
-      console.log(state.duckArray[x]);
-      console.log(x);
-      console.log(state.duckArray.length);
     }
+
+    const ctx = document.getElementById('myChart');
+
+    let clicksArray = [];
+    for (let x = 0; x < state.duckArray.length;x++){
+      let clicks = state.duckArray[x].clicks
+      clicksArray.push(clicks) 
+    }
+    let viewsArray = [];
+    for (let x = 0; x < state.duckArray.length;x++){
+      let views = state.duckArray[x].views
+      viewsArray.push(views) 
+    }
+    let nameArray = [];
+    for (let x = 0; x < state.duckArray.length;x++){
+      let names = state.duckArray[x].name
+      nameArray.push(names) 
+    }
+    console.log(clicksArray)
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: nameArray,
+        datasets: [{
+          label: '# of Views',
+          data: viewsArray,
+          borderWidth: 1
+        },
+        {
+          label: '# of Clicks',
+          data: clicksArray,
+          borderWidth:1,
+        },
+      ],
+      },
+      options: {
+        animations:{
+          x: {
+            duration: 5000,
+            from: 0
+          },
+          y: {
+            duration: 3000,
+            from: 500
+        
+        }
+          }
+        }
+    });
+
     button.remove();
   });
 }
