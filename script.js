@@ -8,8 +8,14 @@ let product2 = document.querySelector('section img:nth-child(2)');
 let product3 = document.querySelector('section img:nth-child(3)');
 let button = document.getElementById('button');
 
-// assign a global variable for clicks, so when the program is run the variable is set to 0
+// Setting the getitem for views and clicks so it retains after refresh
 
+let existingClicks = JSON.parse("existingClicks");
+localStorage.getitem(existingClicks);
+let existingViews = JSON.parse("existingViews");
+localStorage.getitem(existingViews);
+
+// assign a global variable for clicks, so when the program is run the variable is set to 0
 let clickcount = 0;
 
 // Assigning global clicks, so I can break my loop if clicks == totalClicks
@@ -53,6 +59,7 @@ function render(){
   value2 = getRandom();
   value3 = getRandom();
 
+  // Stopping the same image from appearing twice in a row.
   while (value1 === a){
     value1 = getRandom();
   }
@@ -77,6 +84,8 @@ function render(){
   state.duckArray[value2].views++;
   state.duckArray[value3].views++;
 }
+
+//Removes the images on the page so no more clicks can be registered
 function duckDisplay() {
   container.addEventListener('click', function(event){
     if (clickcount === totalClicks){
@@ -86,9 +95,7 @@ function duckDisplay() {
       breakEvent();
     }
     else if(event.target === product1){
-      //console.log(state.duckArray[value1].clicks);
       state.duckArray[value1].clicks++;
-      //console.log(state.duckArray[value1].clicks);
       clickcount++;
       render();
       return;
@@ -108,18 +115,14 @@ function duckDisplay() {
 
 
 }
-
+// Breaking event if called (no button click)
 function breakEvent(){
   container.removeEventListener('click', duckDisplay());
   results();
   return;
 }
 
-let existingViews = [];
-let existingClicks = [];
-
-let existingViewStorage = localStorage.getItem('')
-
+// Result function for theb button to show results AFTER clicks have been completed
 function results(){
   document.getElementById('button').style.cursor = 'pointer';
   let ul = document.querySelector('ul');
@@ -132,22 +135,32 @@ function results(){
 
     const ctx = document.getElementById('myChart');
 
+    // Setting arrays for the data we get after the user clicks and views (Should've done a constructor function)
+
     let clicksArray = [];
     for (let x = 0; x < state.duckArray.length;x++){
-      let clicks = state.duckArray[x].clicks
-      clicksArray.push(clicks) 
+      let clicks = state.duckArray[x].clicks;
+      clicksArray.push(clicks);
     }
     let viewsArray = [];
     for (let x = 0; x < state.duckArray.length;x++){
-      let views = state.duckArray[x].views
-      viewsArray.push(views) 
+      let views = state.duckArray[x].views;
+      viewsArray.push(views);
     }
     let nameArray = [];
     for (let x = 0; x < state.duckArray.length;x++){
-      let names = state.duckArray[x].name
-      nameArray.push(names) 
+      let names = state.duckArray[x].name;
+      nameArray.push(names); 
     }
-    console.log(clicksArray)
+
+    // Setting the data we want to retain between refreshes
+
+    localStorage.getitem("existingViews",JSON.stringify(viewsArray));
+    localStorage.getitem("existingClicks",JSON.stringify(clicksArray));
+
+   
+    // This is a chart that contain different data with arrays and has an animation set from x to y.
+
     new Chart(ctx, {
       type: 'bar',
       data: {
@@ -207,8 +220,10 @@ let watercan = new Products('Watering Can', './img/water-can.jpg', 0);
 let wineglass = new Products('Fancy Wine Glass', './img/wine-glass.jpg', 0);
 
 
+//Pushing object products into an array
 
 state.duckArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass);
+// Calling our two functions
 
 render();
 duckDisplay();
